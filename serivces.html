@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Go Trip Services</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding:0;
+        }
+
+        .nav-bar {
+            display: flex;
+            flex-flow: row wrap;
+            width: 100%;
+            height: 90px;
+            background-color: #fff;
+            box-shadow: 3px 3px 10px lightslategray;
+            align-items: center;
+            justify-content: center;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+        }
+
+        .logo {
+            flex: 1;
+            font-size: 40px;
+            padding: 20px;
+            margin-left: 50px;
+            font-family: Satisfy;
+        }
+
+        ul.menu {
+            flex: 1;
+            display: flex;
+            flex-flow: row wrap;
+        }
+
+        .menu li {
+            flex: 1;
+            list-style-type: none;
+            font-size: 16px;
+            font-family: "Barlow Condensed";
+            text-align: center;
+        }
+
+        .menu li a {
+            text-decoration: none;
+            color: #000;
+            text-transform: uppercase;
+        }
+
+        .menu li a:hover {
+            color: midnightblue;
+            text-decoration: underline;
+        }
+
+        .services {
+            display: flex;
+            flex-flow: row;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .service-item {
+            flex: 1;
+            padding: 50px 10px;
+            border: lightcyan solid 1px;
+            text-align: center;
+            /* margin: 180px 50px; */
+            transition: all 1s;
+            display: flex;
+            flex-flow: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .service-item:hover {
+            box-shadow: 3px 3px 20px rgb(78, 95, 118);
+        }
+
+        .service-item h2 {
+            font-family: Barlow Condensed;
+            font-size: 18px;
+            width: 120px;
+            height: 120px;
+            color: #25292c;
+            flex: 1;
+        }
+
+        .service-item img {
+            width: 300px;
+            height: 300px;
+            flex: 1;
+        }
+
+        .slogan {
+            background-image: url(https://burst.shopifycdn.com/photos/man-hiking-in-mountains.jpg?width=1000&format=pjpg&exif=0&iptc=0);
+            background-position: center;
+            background-size: cover;
+            width: 100%;
+            height: 100vh;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: black;
+            font-weight: bold;
+            padding: 20px;
+        }
+
+        .slogan h1 {
+            margin-top: 250px;
+            font-size: 50px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+            color: rgb(255, 187, 0);
+            justify-content: center;
+        }
+
+        .slogan p {
+            font-size: 24px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+        }
+
+        .slogan button {
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            margin-top: 20px;
+            background-color: rgb(255, 187, 0);
+            padding: 10px 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .slogan button:hover {
+            background-color: rgba(0, 0, 0, 0.61);
+        }
+
+        .welcome {
+            width: 50%;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: white;
+            border: 2px solid white;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+
+        .welcome h1 {
+            font-size: 36px;
+            color: #ffbb00;
+            margin-bottom: 20px;
+            font-weight: bold;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .welcome p {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            margin-top: 20px;
+        }
+
+        .faq {
+            width: 80%;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: #f9f9f9;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            font-family: Arial, sans-serif;
+        }
+
+        .faq h2 {
+            font-size: 32px;
+            color: rgb(255, 187, 0);
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .faq-item {
+            margin-bottom: 15px;
+            border-bottom: 1px solid white;
+            padding-bottom: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .faq-item h3 {
+            font-size: 20px;
+            color: #333;
+            margin: 0;
+            padding: 10px;
+            font-weight: bold;
+        }
+
+        .faq-item .answer {
+            display: none;
+            font-size: 16px;
+            color: black;
+            font-weight: 300;
+            margin-top: 10px;
+            line-height: 1.6;
+            transition:0.5s ease-out;
+        }
+
+        .faq-item:hover .answer {
+            display: block;
+            transform: translateY(10px);
+        }
+
+        .faq-item:hover {
+            background-color: white;
+        }
+
+        .destinations {
+            width: 100%;
+            margin: 40px;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+
+        .destinations h1 {
+            font-size: 36px;
+            color: rgb(255, 187, 0);
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+
+        .destination-cards {
+            display: inline-block;
+            background-color: white;
+            width: 100%;
+            max-width: 300px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin: 15px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .destination-cards img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .destination-cards h2 {
+            font-size: 24px;
+            color: #333;
+            margin: 15px 0 10px;
+        }
+
+        .destination-cards p {
+            padding: 0 20px;
+            font-size: 16px;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .destination-cards button {
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            background-color: rgb(255, 187, 0);
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .destination-cards button:hover {
+            background-color: black;
+        }
+
+        .destination-cards:hover {
+            transform: translateY(-10px);
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .footer {
+            background-image: url("https://images.indianexpress.com/2023/09/jahaz-mahal.jpg?resize=600,400");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            width: 100%;
+            height: 670px;
+            position: relative;
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .footer::before {
+            position: absolute;
+            content: "";
+            display: block;
+            background-color: rgba(0, 0, 36, 0.8);
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+        }
+
+        .footer .links {
+            position: relative;
+            color: #fff;
+            flex: 1;
+            display: flex;
+            flex-flow: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .links ul {
+            list-style-type: none;
+        }
+
+        .links h3 {
+            font-family: Barlow Condensed;
+            font-weight: normal;
+            font-size: 23px;
+            margin-bottom: 15px;
+        }
+
+        .links li {
+            font-family: Roboto;
+            cursor: pointer;
+            padding: 15px 0;
+        }
+
+        .links li:hover {
+            color: #ffa801;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="nav-bar">
+        <div class="logo">Go Trip</div>
+        <ul class="menu">
+            <li><a href="#">home</a></li>
+            <li><a href="#">about us</a></li>
+            <li><a href="#">tours</a></li>
+            <li><a href="#">SERVICES</a></li>
+            <li><a href="#">Contact Us</a></li>
+        </ul>
+        </div>
+    </section>
+    <div class="container">
+        <div class="slogan">
+            <h1>Go Trip Services</h1>
+            <p>Your search for a travel agency has come to an end join us now.</p>
+            <button>Book Now:</button>
+        </div>
+    </div>
+    <div class="welcome">
+        <h1>Welcome To Go Trip</h1>
+        <p>
+            Here at Go Trip we provide many services to our clients from booking trips to other parts of the world or
+            within your own country.
+            We also provide shipping across several countries across all continents. Work with us to make your
+            experience a memorable one.
+            Thank You.
+        </p>
+    </div>
+    <section class="services">
+        <div class="service-item">
+            <img
+                src="https://images.pexels.com/photos/346885/pexels-photo-346885.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500">
+            <h2>8000+ Our Local Guides</h2>
+        </div>
+        <div class="service-item">
+            <img
+                src="https://media.istockphoto.com/id/1344771294/photo/happy-family-in-masks-enjoying-travel-together.jpg?s=612x612&w=0&k=20&c=JMGLBlMM4TyAQ1CAgDJx9igoSucyehARKkvN2rZpec0=">
+            <h2>100% Trusted Tour Agency</h2>
+        </div>
+        <div class="service-item">
+            <img
+                src="https://thumbs.dreamstime.com/b/female-tourist-travelling-airplane-world-map-illustrated-background-elements-image-furnished-nasa-76665106.jpg">
+            <h2>20+ Years of Travel Experience</h2>
+        </div>
+        <div class="service-item">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZvXSBfV3eIUdzrMomUgZ9cir3z6IznzPctg&s">
+            <h2>98% Our Travelers are Happy</h2>
+        </div>
+    </section>
+
+    <section class="destinations">
+        <h1>Our Services</h1>
+        <div class="destination-cards">
+            <img src="https://rosemaryravinal.com/wp-content/uploads/2024/07/Tour-guide.png">
+            <h2>Tour Guides</h2>
+            <p> In Go Trip we offer tlur guides across the world to show you the way around the selected destination.
+            </p>
+            <button>Find Out More:</button>
+        </div>
+        <div class="destination-cards">
+            <img
+                src="https://www.clickpost.ai/hubfs/featured%20images/Updated%20blog%20banner%20images%20Mar%2022/eCommerce-shipping-methods.webp">
+            <h2>Online Shipping</h2>
+            <p> We Offers online shipping services to estemeed customers anywhere across the world.
+            </p>
+            <button>Find Out More:</button>
+        </div>
+        <div class="destination-cards">
+            <img src="https://www.shipbob.com/wp-content/uploads/2019/01/iStock-692898468-2-optimized.webp">
+            <h2>Placing Orders/ Tickets</h2>
+            <p>
+                Our service allows you to effortlessly place orders or book tickets to your dream destinations.
+            </p>
+            <button>Find Out More:</button>
+        </div>
+    </section>
+
+    <section class="destinations">
+        <h1>Pouplar Touring Destinations</h1>
+        <div class="destination-cards">
+            <img src="https://149990825.v2.pressablecdn.com/wp-content/uploads/2023/09/Paris1.jpg">
+            <h2>Paris, France</h2>
+            <p> Explore Paris the city of wonders and artistics senaries like the Eiffel tower.</p>
+            <button>Explore Paris</button>
+        </div>
+        <div class="destination-cards">
+            <img
+                src="https://content.r9cdn.net/rimg/dimg/10/dd/c1632a46-city-20339-15873436110.jpg?width=1366&height=768&xhint=792&yhint=1072&crop=true">
+            <h2>Kyoto, Japan</h2>
+            <p> Explore the city of Kyoto where nature rule the lands from cherry blossoms to the ancient buildings.
+            </p>
+            <button>Explore Kyoto</button>
+        </div>
+        <div class="destination-cards">
+            <img src="https://ole-sereni.com/wp-content/uploads/2023/05/visit-to-Nairobi-1024x682.jpg">
+            <h2>Nairobi, Kenya</h2>
+            <p>
+                Nairobi has the most majestic wildlife which will make you want to see more each time you visit.
+            </p>
+            <button>Explore Nairobi</button>
+        </div>
+        <div class="destination-cards">
+            <img src="https://cdn.britannica.com/37/189837-050-F0AF383E/New-Delhi-India-War-Memorial-arch-Sir.jpg">
+            <h2>New Delhi, India</h2>
+            <p>
+                New Delhi hosts many cultural festivals and events, including the Delhi International Arts Festival.
+            </p>
+            <button>Explore New Delhi</button>
+        </div>
+    </section>
+    <section class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-item">
+            <h3>How do I book a trip?</h3>
+            <div class="answer">
+                <p>Simply click on the ‘Book Now’ button or contact us for assistance.</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <h3>Do you offer discounts?</h3>
+            <div class="answer">
+                <p>We offer seasonal discounts and special packages. Contact us for more details.</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <h3>What payment methods do you accept?</h3>
+            <div class="answer">
+                <p>We accept major credit cards, PayPal, and bank transfers.</p>
+            </div>
+        </div>
+    </section>
+    <div class="footer">
+        <div class="links">
+            <h3>Quick Links</h3>
+            <ul>
+                <li>Offers & Discounts</li>
+                <li>Get Coupon</li>
+                <li>Contact Us</li>
+                <li>About</li>
+            </ul>
+        </div>
+        <div class="links">
+            <h3>New Products</h3>
+            <ul>
+                <li>Woman Cloth</li>
+                <li>Fashion Accessories</li>
+                <li>Man Accessories</li>
+                <li>Rubber made Toys</li>
+            </ul>
+        </div>
+        <div class="links">
+            <h3>Support</h3>
+            <ul>
+                <li>Frequently Asked Questions</li>
+                <li>Report a Payment Issue</li>
+                <li>Terms & Conditions</li>
+                <li>Privacy Policy</li>
+            </ul>
+        </div>
+    </div>
+</body>
+
+</html>
